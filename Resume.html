@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Roopali</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            transition: color 0.3s;
+            padding: 5px 15px;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 80px auto 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .page {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .bio-section {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4em;
+            font-weight: bold;
+        }
+
+        .bio-content h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .contact-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .contact-item strong {
+            color: #667eea;
+        }
+
+        .education-item, .project-item, .achievement-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .education-item h3, .project-item h3, .achievement-item h3 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            color: #764ba2;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-category {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-top: 4px solid #667eea;
+        }
+
+        .skill-category h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .skill-category li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .internship-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .internship-item h3 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .bio-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-img {
+                margin: 0 auto;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('bio')">Bio</a></li>
+            <li><a href="#" onclick="showPage('education')">Education</a></li>
+            <li><a href="#" onclick="showPage('skills')">Skills</a></li>
+            <li><a href="#" onclick="showPage('projects')">Projects</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="header">
+                <h1>Roopali</h1>
+                <p>Computer Science Engineering Student | 5th Semester</p>
+            </div>
+            <div style="padding: 40px; text-align: center;">
+                <h2 style="color: #667eea; margin-bottom: 20px;">Welcome to My Portfolio</h2>
+                <p style="font-size: 1.1em; line-height: 1.8; color: #555;">
+                    I am a passionate Computer Science Engineering student currently in my 5th semester. 
+                    I'm eager to learn new technologies, work on innovative projects, and contribute to the tech industry. 
+                    Explore my portfolio to learn more about my academic journey, skills, and projects.
+                </p>
+                <button onclick="showPage('bio')">Learn More About Me</button>
+            </div>
+        </div>
+
+        <!-- Bio Page -->
+        <div id="bio" class="page">
+            <h2 class="section-title">About Me</h2>
+            <div class="bio-section">
+                <div class="profile-img">R</div>
+                <div class="bio-content">
+                    <h3>Student Profile</h3>
+                    <p>
+                        I am Roopali, a dedicated Computer Science Engineering student currently pursuing my B.Tech degree. 
+                        I have a strong passion for web development, programming, and exploring emerging technologies. 
+                        I'm always excited to take on new challenges and learn from hands-on experience. My goal is to 
+                        become a skilled software developer and contribute to innovative solutions in the tech world.
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="color: #764ba2; margin: 30px 0 15px;">Contact Information</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>Email:</strong> roopalimule555@email.com
+                </div>
+                <div class="contact-item">
+                    <strong>Phone:</strong> +91 9632321789
+                </div>
+                <div class="contact-item">
+                    <strong>Location:</strong> India
+                </div>
+                <div class="contact-item">
+                    <strong>LinkedIn:</strong> linkedin.com/in/roopalimul07
+                </div>
+            </div>
+
+            <h3 style="color: #764ba2; margin: 30px 0 15px;">Career Objective</h3>
+            <p>
+                To secure a challenging position in a reputed organization where I can utilize my technical skills 
+                and knowledge of Computer Science. I aim to contribute to innovative projects while continuously 
+                learning and growing as a professional in the field of software development.
+            </p>
+
+            <h3 style="color: #764ba2; margin: 30px 0 15px;">Interests & Hobbies</h3>
+            <p>
+                Apart from coding and academics, I enjoy exploring new programming languages, reading tech blogs, 
+                participating in coding competitions, and working on personal projects. I also love problem-solving 
+                and learning about new technologies through online courses and tutorials.
+            </p>
+        </div>
+
+        <!-- Education Page -->
+        <div id="education" class="page">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="education-item">
+                <h3>Bachelor of Technology in Computer Science Engineering</h3>
+                <div class="date">Currently Pursuing | 5th Semester | Expected Graduation: 2026</div>
+                <p>
+                    <strong>College:</strong> Banguluru Instittute of technology<br>
+                    <strong>Current CGPA:</strong> 8.5/10 <br>
+                    <strong>Relevant Coursework:</strong> Data Structures, Algorithms, Database Management Systems, 
+                    Operating Systems, Computer Networks, Web Technologies, Software Engineering, Object-Oriented Programming
+                </p>
+            </div>
+
+            <div class="education-item">
+                <h3>Higher Secondary Education (Diploma)</h3>
+                <div class="date">Completed: 2022</div>
+                <p>
+                    <strong>School:</strong> Government Polytechnic GLB<br>
+                    <strong>Board:</strong> State Board<br>
+                    <strong>Percentage:</strong> 95%<br>
+                    <strong>Stream:</strong> CSE
+                </p>
+            </div>
+            <div class="education-item">
+                <h3>Secondary Education (10th Grade)</h3>
+                <div class="date">Completed: 2020</div>
+                <p>
+                    <strong>School:</strong> Government High School<br>
+                    <strong>Board:</strong> State Board<br>
+                    <strong>Percentage:</strong> 90% 
+                </p>
+            </div>
+
+            <h3 style="color: #667eea; margin: 30px 0 15px;">Online Courses & Certifications</h3>
+            
+            <div class="education-item">
+                <h3>Web Development Bootcamp</h3>
+                <div class="date">Udemy/Coursera | 2024</div>
+                <p>Completed comprehensive course on HTML, CSS, JavaScript, and modern web frameworks</p>
+            </div>
+
+            <div class="education-item">
+                <h3>Python Programming</h3>
+                <div class="date">Online Platform | 2023</div>
+                <p>Learned Python fundamentals, data structures, and basic algorithms</p>
+            </div>
+        </div>
+
+        <!-- Skills Page -->
+        <div id="skills" class="page">
+            <h2 class="section-title">Technical Skills</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul>
+                        <li>C/C++</li>
+                        <li>Java</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Web Development</h3>
+                    <ul>
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript</li>
+                        <li>jQuery</li>
+                        <li>PHP</li>
+                        <li>MySQL</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Core Subjects</h3>
+                    <ul>
+                        <li>Data Structures</li>
+                        <li>Algorithms</li>
+                        <li>DBMS</li>
+                        <li>Operating Systems</li>
+                        <li>OOP Concepts</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <ul>
+                        <li>Git & GitHub</li>
+                        <li>VS Code</li>
+                        <li>MS Office</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Page -->
+        <div id="projects" class="page">
+            <h2 class="section-title">Academic Projects</h2>
+            
+            <div class="project-item">
+                <h3>Online Registration Form Application</h3>
+                <div class="date">Technologies: HTML, CSS, JavaScript, jQuery, PHP</div>
+                <p>
+                    Developed a complete web-based registration form with real-time validation, form submission handling, 
+                    and result display functionality. Implemented responsive design and user-friendly interface with 
+                    proper error handling and data formatting.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Features:</strong> Form validation, Dynamic error messages, Result display page, 
+                    Print functionality, Responsive design
+                </p>
+            </div>
+
+            <div class="project-item">
+                <h3>Personal Resume Website</h3>
+                <div class="date">Technologies: HTML5, CSS3, JavaScript, jQuery</div>
+                <p>
+                    Created a multi-page professional resume website showcasing bio-data, education, skills, and projects. 
+                    Implemented smooth navigation, modern design with gradients, and interactive elements using jQuery.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Features:</strong> Multi-page navigation, Responsive layout, Animated transitions, 
+                    Professional styling, Portfolio sections
+                </p>
+            </div>
+
+            <div class="project-item">
+                <h3>Student Database Management System</h3>
+                <div class="date">Technologies: Java, MySQL</div>
+                <p>
+                    Built a console-based application to manage student records including adding, updating, deleting, 
+                    and searching student information. Implemented CRUD operations with MySQL database connectivity.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Features:</strong> CRUD operations, Database integration, Data validation, 
+                    Search functionality
+                </p>
+            </div>
+
+            <div class="project-item">
+                <h3>Calculator Application</h3>
+                <div class="date">Technologies: HTML, CSS, JavaScript</div>
+                <p>
+                    Developed a fully functional web-based calculator with basic arithmetic operations, 
+                    clear functionality, and responsive design suitable for all devices.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Features:</strong> Basic operations, Decimal support, Keyboard input, 
+                    Clean UI design
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function showPage(pageId) {
+            $('.page').removeClass('active');
+            $('#' + pageId).addClass('active');
+            
+            // Smooth scroll to top
+            $('html, body').animate({ scrollTop: 0 }, 400);
+        }
+
+        // Add smooth scrolling effect
+        $(document).ready(function() {
+            $('nav a').click(function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>
